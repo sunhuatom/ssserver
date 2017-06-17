@@ -97,13 +97,13 @@ function start_ss()
 
 
 	cp shadowsocks.json /etc/shadowsocks.json
-	nohup ssserver -c /etc/shadowsocks.json ‐d start > /dev/null 2>&1 &
 
 	#add start-up
-	cp runssserver /etc/init.d/runssserver
+	cp ssserver.service /etc/systemd/system/ssserver.service
 	chmod +x /etc/init.d/runssserver
-	cp runssserver.conf /etc/init/runssserver.conf
-	update-rc.d runssserver defaults 
+	systemctl enable ssserver
+	#start ssserver service
+	systemctl start ssserver
 	# optimize shadowsocks
 	OPTI=local.conf
 	LOCALCONF=/etc/sysctl.d/local.conf
