@@ -124,12 +124,7 @@ function start_ss()
 # main
 #
 #judge whether root or not
-if [ "$UID" -eq 0 ];then
-read -p "(Please input root password):" ROOT_PASSWD
-if [ "$ROOT_PASSWD" = "" ]; then
-echo "Error: Password can't be NULL!!"
-exit 1
-fi
+if [ "$EUID" -eq 0 ];then
 	install_soft_for_each
 	start_ss
 else
