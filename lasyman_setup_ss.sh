@@ -100,7 +100,6 @@ function start_ss()
 
 	#add start-up
 	cp ssserver.service /etc/systemd/system/ssserver.service
-	chmod +x /etc/init.d/runssserver
 	systemctl enable ssserver
 	#start ssserver service
 	systemctl start ssserver

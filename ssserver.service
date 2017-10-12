@@ -3,8 +3,12 @@ Description=Shadowsocks Server
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/ssserver -c /etc/shadowsocks.json
-Restart=on-abort
+Type=oneshot 
+PIDFile=/var/run/shadowsocks_server.pid
+ExecStart=/usr/local/bin/ssserver -c /etc/shadowsocks.json -d start
+ExecReload=/usr/bin/ssserver -c /etc/shadowsocks.json -d restart
+ExecStop=/usr/bin/ssserver -c /etc/shadowsocks.json -d stop
+PrivateTmp=true  
 
 [Install]
 WantedBy=multi-user.target
